@@ -1,10 +1,10 @@
-# Chile Vapo - Andes Vapor Attributes Connector
+# Woo Multisite Manual Connector
 
-Plugin para conectar atributos de productos entre Chile Vapo y Andes Vapor usando WooCommerce Multistore.
+Plugin para conectar productos y atributos entre sitios master y slave usando WooCommerce Multistore.
 
 ## Descripción
 
-Este plugin proporciona una interfaz de administración para conectar atributos de productos entre dos tiendas WooCommerce (Chile Vapo y Andes Vapor) utilizando el sistema de relaciones de WooCommerce Multistore. Una vez conectados, los atributos se sincronizan automáticamente cuando se actualizan en cualquiera de las tiendas.
+Este plugin proporciona una interfaz de administración para conectar atributos de productos entre múltiples tiendas WooCommerce utilizando el sistema de relaciones de WooCommerce Multistore. Una vez conectados, los atributos se sincronizan automáticamente cuando se actualizan en cualquiera de las tiendas configuradas.
 
 ## Características
 
@@ -13,12 +13,14 @@ Este plugin proporciona una interfaz de administración para conectar atributos 
 - **Conexión manual y automática**: Conecta atributos manualmente o automáticamente por nombre
 - **Validación en tiempo real**: Verifica la validez de las conexiones antes de aplicarlas
 - **Notificaciones**: Sistema de notificaciones para informar sobre el estado de las operaciones
-- **Configuración flexible**: Selección de sitios y opciones de configuración
+- **Configuración flexible**: Selección de sitios master y slave
+- **Compatibilidad con HPOS**: Soporte para High-Performance Order Storage
+- **Sincronización forzada**: Opción para forzar la actualización de productos
 
 ## Requisitos
 
-- WordPress 5.0 o superior
-- WooCommerce 3.6.0 o superior
+- WordPress 5.8 o superior
+- WooCommerce 7.0 o superior
 - WooCommerce Multistore activo
 - PHP 7.4 o superior
 - Red multisite configurada
@@ -27,31 +29,34 @@ Este plugin proporciona una interfaz de administración para conectar atributos 
 
 1. Sube el plugin a la carpeta `/wp-content/plugins/`
 2. Activa el plugin desde el panel de administración
-3. Ve a **Conector CV-AV > Configuración** para configurar los sitios
-4. Configura Chile Vapo y Andes Vapor como sitios de origen y destino
+3. Ve a **Woo Multisite Connector > Configuración** para configurar los sitios
+4. Configura los sitios master y slave según tus necesidades
 
 ## Configuración
 
 ### Configuración Inicial
 
 1. **Seleccionar Sitios**: 
-   - Chile Vapo: Selecciona el sitio que representa Chile Vapo
-   - Andes Vapor: Selecciona el sitio que representa Andes Vapor
+   - **Sitio Master**: Selecciona el sitio principal que controlará las conexiones
+   - **Sitio Slave**: Selecciona el sitio secundario que recibirá las conexiones
 
 2. **Opciones Adicionales**:
-   - Conectar automáticamente: Conecta atributos con el mismo nombre automáticamente
-   - Email de notificación: Email para recibir notificaciones
+   - **Conectar automáticamente**: Conecta atributos con el mismo nombre automáticamente
+   - **Sincronización automática**: Activa la sincronización automática de productos
+   - **Intervalo de sincronización**: Configura la frecuencia de sincronización
+   - **Email de notificación**: Email para recibir notificaciones
+   - **Forzar actualización**: Habilita la actualización forzada de productos
 
 ### Gestión de Conexiones
 
 1. **Ver Conexiones Existentes**: 
-   - Ve a **Conector CV-AV > Conexiones**
-   - Visualiza todas las conexiones activas
+   - Ve a **Woo Multisite Connector > Conexiones**
+   - Visualiza todas las conexiones activas entre sitios
 
 2. **Conectar Nuevos Atributos**:
    - Haz clic en "Conectar Nuevos Atributos"
-   - Selecciona el atributo de Chile Vapo
-   - Selecciona el atributo de Andes Vapor
+   - Selecciona el atributo del sitio master
+   - Selecciona el atributo del sitio slave
    - Confirma la conexión
 
 3. **Desconectar Atributos**:
@@ -62,22 +67,29 @@ Este plugin proporciona una interfaz de administración para conectar atributos 
 
 ### Conectar Atributos Manualmente
 
-1. Ve a **Conector CV-AV > Conexiones**
+1. Ve a **Woo Multisite Connector > Conexiones**
 2. Haz clic en "Conectar Nuevos Atributos"
 3. Selecciona los atributos que deseas conectar
 4. Haz clic en "Conectar"
 
 ### Conectar Atributos Automáticamente
 
-1. Ve a **Conector CV-AV > Configuración**
+1. Ve a **Woo Multisite Connector > Configuración**
 2. Activa "Conectar automáticamente atributos con el mismo nombre"
 3. Los nuevos atributos con nombres idénticos se conectarán automáticamente
 
 ### Verificar Conexiones
 
-1. Ve a **Conector CV-AV > Conexiones**
+1. Ve a **Woo Multisite Connector > Conexiones**
 2. Revisa la lista de atributos conectados
 3. El estado "Conectado" indica que la sincronización está activa
+
+### Sincronización de Productos
+
+1. Ve a **Woo Multisite Connector > Productos**
+2. Selecciona los productos que deseas sincronizar
+3. Haz clic en "Sincronizar Productos"
+4. Los productos se sincronizarán entre los sitios configurados
 
 ## Estructura de Base de Datos
 
@@ -85,13 +97,13 @@ El plugin utiliza las tablas existentes de WooCommerce Multistore:
 
 ```sql
 -- Tabla de relaciones de atributos (WooCommerce Multistore)
-wp_woo_multistore_attributes_relationships
+wp_{site_id}_woo_multistore_attributes_relationships
 ```
 
 ### Campos Utilizados
 
-- `attribute_id`: ID del atributo en Chile Vapo
-- `child_attribute_id`: ID del atributo en Andes Vapor
+- `attribute_id`: ID del atributo en el sitio master
+- `child_attribute_id`: ID del atributo en el sitio slave
 
 ## Hooks y Filtros
 
@@ -99,16 +111,22 @@ wp_woo_multistore_attributes_relationships
 
 ```php
 // Antes de conectar atributos
-do_action('cvav_before_connect_attributes', $chilevapo_id, $andesvapor_id);
+do_action('cvav_before_connect_attributes', $master_attribute_id, $slave_attribute_id);
 
 // Después de conectar atributos
-do_action('cvav_after_connect_attributes', $chilevapo_id, $andesvapor_id, $result);
+do_action('cvav_after_connect_attributes', $master_attribute_id, $slave_attribute_id, $result);
 
 // Antes de desconectar atributos
-do_action('cvav_before_disconnect_attributes', $chilevapo_id, $andesvapor_id);
+do_action('cvav_before_disconnect_attributes', $master_attribute_id, $slave_attribute_id);
 
 // Después de desconectar atributos
-do_action('cvav_after_disconnect_attributes', $chilevapo_id, $andesvapor_id, $result);
+do_action('cvav_after_disconnect_attributes', $master_attribute_id, $slave_attribute_id, $result);
+
+// Antes de sincronizar productos
+do_action('cvav_before_sync_products', $product_ids);
+
+// Después de sincronizar productos
+do_action('cvav_after_sync_products', $product_ids, $result);
 ```
 
 ### Filters
@@ -122,6 +140,9 @@ apply_filters('cvav_available_attributes', $attributes, $site_id);
 
 // Filtrar conexiones existentes
 apply_filters('cvav_existing_connections', $connections);
+
+// Filtrar productos para sincronización
+apply_filters('cvav_products_to_sync', $product_ids);
 ```
 
 ## API REST
@@ -131,7 +152,9 @@ apply_filters('cvav_existing_connections', $connections);
 ```
 GET /wp-json/cvav/v1/connections
 GET /wp-json/cvav/v1/attributes/{site_id}
+GET /wp-json/cvav/v1/products/{site_id}
 POST /wp-json/cvav/v1/connections
+POST /wp-json/cvav/v1/sync-products
 DELETE /wp-json/cvav/v1/connections/{connection_id}
 ```
 
@@ -144,8 +167,15 @@ $response = wp_remote_get('/wp-json/cvav/v1/connections');
 // Conectar atributos
 $response = wp_remote_post('/wp-json/cvav/v1/connections', array(
     'body' => array(
-        'chilevapo_attribute_id' => 123,
-        'andesvapor_attribute_id' => 456
+        'master_attribute_id' => 123,
+        'slave_attribute_id' => 456
+    )
+));
+
+// Sincronizar productos
+$response = wp_remote_post('/wp-json/cvav/v1/sync-products', array(
+    'body' => array(
+        'product_ids' => [1, 2, 3]
     )
 ));
 ```
@@ -166,6 +196,10 @@ $response = wp_remote_post('/wp-json/cvav/v1/connections', array(
    - Verifica que WooCommerce Multistore esté configurado correctamente
    - Revisa la configuración de red multisite
 
+4. **Sitios no aparecen en la lista**:
+   - Verifica que WooCommerce esté activo en todos los sitios
+   - Confirma que la red multisite esté configurada correctamente
+
 ### Logs de Error
 
 Los errores se registran en:
@@ -175,30 +209,34 @@ Los errores se registran en:
 ### Verificación de Estado
 
 1. **Verificar Configuración**:
-   - Ve a **Conector CV-AV > Configuración**
+   - Ve a **Woo Multisite Connector > Configuración**
    - Confirma que los sitios estén seleccionados
 
 2. **Verificar Conexiones**:
-   - Ve a **Conector CV-AV > Conexiones**
+   - Ve a **Woo Multisite Connector > Conexiones**
    - Revisa que las conexiones aparezcan correctamente
 
 3. **Verificar WooCommerce Multistore**:
    - Confirma que WooCommerce Multistore esté activo
    - Verifica la configuración de red multisite
 
+4. **Debug de Sitios Disponibles**:
+   - Usa la función de debug para verificar qué sitios están disponibles
+   - Verifica que WooCommerce esté activo en todos los sitios
+
 ## Seguridad
 
 ### Permisos Requeridos
 
 - `manage_options`: Para acceder a la configuración
-- `manage_woocommerce`: Para gestionar atributos
+- `manage_woocommerce`: Para gestionar atributos y productos
 
 ### Validaciones
 
 - Verificación de nonces en todas las operaciones AJAX
 - Sanitización de datos de entrada
 - Validación de permisos de usuario
-- Verificación de existencia de atributos
+- Verificación de existencia de atributos y productos
 
 ### Recomendaciones
 
@@ -211,8 +249,8 @@ Los errores se registran en:
 
 ### Versiones Soportadas
 
-- **WordPress**: 5.0 - 6.8.1
-- **WooCommerce**: 3.6.0 - 9.9.5
+- **WordPress**: 5.8 - 6.8
+- **WooCommerce**: 7.0 - 9.9.5
 - **WooCommerce Multistore**: Versiones compatibles
 - **PHP**: 7.4 - 8.3
 
@@ -233,13 +271,14 @@ Los errores se registran en:
 ### Estructura del Plugin
 
 ```
-chilevapo-andesvapor-attributes-connector/
-├── chilevapo-andesvapor-attributes-connector.php
+woo-multisite-manual-connector/
+├── woo-multisite-manual-connector.php
 ├── includes/
 │   ├── class-cvav-admin.php
 │   ├── class-cvav-connector.php
 │   ├── class-cvav-settings.php
-│   └── class-cvav-ajax.php
+│   ├── class-cvav-ajax.php
+│   └── class-cvav-products.php
 ├── assets/
 │   ├── css/
 │   │   └── admin.css
@@ -247,6 +286,8 @@ chilevapo-andesvapor-attributes-connector/
 │       └── admin.js
 ├── languages/
 ├── README.md
+├── CHANGELOG.md
+├── HPOS_COMPATIBILITY.md
 └── uninstall.php
 ```
 
@@ -256,6 +297,7 @@ chilevapo-andesvapor-attributes-connector/
 - **CVAV_Connector**: Lógica principal de conexiones
 - **CVAV_Settings**: Gestión de configuración
 - **CVAV_Ajax**: Manejo de operaciones AJAX
+- **CVAV_Products**: Gestión de productos y sincronización
 
 ### Extensibilidad
 
@@ -267,9 +309,18 @@ add_filter('cvav_validate_connection', 'mi_validacion_personalizada');
 
 // Agregar acción después de conectar
 add_action('cvav_after_connect_attributes', 'mi_funcion_personalizada');
+
+// Agregar filtro para productos
+add_filter('cvav_products_to_sync', 'filtrar_productos_personalizado');
 ```
 
 ## Changelog
+
+### Versión 1.1.1
+- Mejoras en la detección de sitios disponibles
+- Soporte mejorado para WooCommerce Multistore
+- Correcciones en la interfaz de administración
+- Mejoras en el sistema de debug
 
 ### Versión 1.0.0
 - Lanzamiento inicial
@@ -281,14 +332,10 @@ add_action('cvav_after_connect_attributes', 'mi_funcion_personalizada');
 ## Soporte
 
 Para soporte técnico:
-- Email: soporte@chilevapo.cl
-- Documentación: [URL de documentación]
-- GitHub: [URL del repositorio]
-
-## Licencia
-
-Este plugin es propiedad de Chile Vapo y está diseñado específicamente para su uso interno.
+- Email: info@woomultisiteconnector.com
+- Documentación: https://woomultisiteconnector.com
+- GitHub: https://github.com/svenms/Woo-Multistore-Manual-Connector
 
 ## Créditos
 
-Desarrollado por Chile Vapo para la gestión de atributos entre tiendas WooCommerce Multistore. 
+Desarrollado para la gestión de productos y atributos entre tiendas WooCommerce Multistore. 
