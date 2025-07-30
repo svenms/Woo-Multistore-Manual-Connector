@@ -1,0 +1,834 @@
+/* Estilos para el plugin Chile Vapo - Andes Vapor Attributes Connector - Version 1.1.1 */
+
+/* Contenedor principal */
+.cvav-header-actions {
+    margin: 20px 0;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+}
+
+.cvav-header-actions .button {
+    margin-right: 10px;
+}
+
+/* Contenedor de conexiones */
+.cvav-connections-container {
+    margin-top: 20px;
+}
+
+.cvav-no-connections {
+    text-align: center;
+    padding: 40px 20px;
+    background: #f9f9f9;
+    border: 2px dashed #ddd;
+    border-radius: 4px;
+    color: #666;
+}
+
+.cvav-no-connections p {
+    font-size: 16px;
+    margin: 0;
+}
+
+/* Tabla de conexiones */
+.cvav-connections-container table {
+    margin-top: 15px;
+}
+
+.cvav-connections-container th {
+    font-weight: 600;
+    background: #f1f1f1;
+}
+
+.cvav-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.cvav-status-active {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.cvav-status-inactive {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.cvav-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.cvav-actions .button {
+    font-size: 11px;
+    padding: 2px 8px;
+    height: auto;
+    line-height: 1.4;
+}
+
+/* Modal */
+.cvav-modal {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.cvav-modal.cvav-modal-open {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cvav-modal-content {
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    border-radius: 4px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.cvav-modal-header {
+    padding: 20px 20px 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.cvav-modal-header h2 {
+    margin: 0;
+    color: #23282d;
+    font-size: 18px;
+}
+
+.cvav-modal-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 100001;
+}
+
+.cvav-modal-close:hover {
+    color: #000;
+}
+
+.cvav-modal-body {
+    padding: 0 20px 20px;
+}
+
+.cvav-modal-footer {
+    padding: 15px 20px;
+    background: #f9f9f9;
+    border-top: 1px solid #ddd;
+    text-align: right;
+    border-radius: 0 0 4px 4px;
+}
+
+.cvav-modal-footer .button {
+    margin-left: 10px;
+}
+
+/* Formulario */
+.cvav-form-row {
+    margin-bottom: 20px;
+}
+
+.cvav-form-row label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #23282d;
+}
+
+.cvav-form-row select,
+.cvav-form-row input[type="text"],
+.cvav-form-row input[type="email"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.cvav-form-row select:focus,
+.cvav-form-row input[type="text"]:focus,
+.cvav-form-row input[type="email"]:focus {
+    border-color: #0073aa;
+    box-shadow: 0 0 0 1px #0073aa;
+    outline: none;
+}
+
+.cvav-form-row .description {
+    margin-top: 5px;
+    color: #666;
+    font-style: italic;
+    font-size: 13px;
+}
+
+/* Errores del formulario */
+.cvav-form-error {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 3px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Notificaciones */
+.cvav-notification {
+    margin: 20px 0;
+    padding: 10px 15px;
+    border-left: 4px solid;
+    background: #fff;
+}
+
+.cvav-notification.notice-success {
+    border-color: #46b450;
+}
+
+.cvav-notification.notice-error {
+    border-color: #dc3232;
+}
+
+/* Estados de carga */
+.cvav-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+.cvav-loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #0073aa;
+    border-radius: 50%;
+    animation: cvav-spin 1s linear infinite;
+    margin-right: 12px;
+}
+
+.cvav-loading-text {
+    font-size: 14px;
+    color: #666;
+}
+
+.cvav-loading p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.cvav-loading p:before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #0073aa;
+    border-radius: 50%;
+    animation: cvav-spin 1s linear infinite;
+    margin-right: 12px;
+}
+
+@keyframes cvav-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Botones deshabilitados */
+.cvav-actions .button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cvav-modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+    
+    .cvav-header-actions .button {
+        display: block;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    .cvav-actions {
+        flex-direction: column;
+    }
+    
+    .cvav-actions .button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
+
+/* Estilos para la página de configuración */
+.cvav-info-section {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.cvav-info-section h3 {
+    margin-top: 0;
+    color: #23282d;
+}
+
+.cvav-info-section p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+/* Estilos para estadísticas */
+.cvav-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.cvav-stat-card {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.cvav-stat-number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0073aa;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.cvav-stat-label {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Estilos para búsqueda */
+.cvav-search-container {
+    margin: 20px 0;
+}
+
+.cvav-search-input {
+    width: 300px;
+    max-width: 100%;
+}
+
+/* Estilos para filtros */
+.cvav-filters {
+    margin: 20px 0;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.cvav-filters select {
+    margin-right: 15px;
+    min-width: 150px;
+}
+
+/* Estilos para paginación */
+.cvav-pagination {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.cvav-pagination .page-numbers {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 2px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #0073aa;
+}
+
+.cvav-pagination .current {
+    background: #0073aa;
+    color: #fff;
+    border-color: #0073aa;
+}
+
+/* Estilos para tooltips */
+.cvav-tooltip {
+    position: relative;
+    cursor: help;
+}
+
+.cvav-tooltip:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+/* Estilos para badges */
+.cvav-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+
+.cvav-badge-success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.cvav-badge-warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.cvav-badge-error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* Estilos para iconos */
+.cvav-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.cvav-icon-link {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%230073aa"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>') no-repeat center;
+}
+
+.cvav-icon-unlink {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23dc3232"><path d="M17 7h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5zM3 12c0-1.71 1.39-3.1 3.1-3.1h4V7H6.1C3.34 7 1 9.34 1 12s2.34 5 5.1 5h4v-1.9H6.1c-1.71 0-3.1-1.39-3.1-3.1z"/></svg>') no-repeat center;
+} 
+
+/* Estilos para la página de debug */
+.cvav-debug-section {
+    margin: 30px 0;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.cvav-debug-section h2 {
+    margin-top: 0;
+    color: #23282d;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.cvav-debug-section table {
+    margin-top: 15px;
+}
+
+.cvav-debug-section th {
+    background: #f9f9f9;
+    font-weight: 600;
+}
+
+.cvav-debug-section td,
+.cvav-debug-section th {
+    padding: 8px 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.cvav-debug-section tr:hover {
+    background: #f9f9f9;
+}
+
+.cvav-debug-section .button {
+    margin-right: 10px;
+} 
+
+/* Estilos para la visualización del sitio Chile Vapo */
+.cvav-site-display {
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.cvav-site-display strong {
+    color: #23282d;
+    font-size: 14px;
+}
+
+.cvav-site-display small {
+    color: #666;
+    font-size: 12px;
+}
+
+.cvav-site-display .cvav-badge {
+    margin-left: 10px;
+}
+
+/* ========================================
+   ESTILOS PARA PRODUCTOS
+   ======================================== */
+
+/* Contenedor de búsqueda de productos */
+.cvav-search-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.cvav-search-box {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.cvav-search-box h3 {
+    margin: 0 0 15px 0;
+    color: #23282d;
+    font-size: 16px;
+    border-bottom: 2px solid #0073aa;
+    padding-bottom: 8px;
+}
+
+.cvav-search-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.cvav-search-input input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.cvav-search-input input:focus {
+    border-color: #0073aa;
+    box-shadow: 0 0 0 1px #0073aa;
+    outline: none;
+}
+
+.cvav-search-input .button {
+    white-space: nowrap;
+}
+
+/* Resultados de búsqueda */
+.cvav-search-results {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background: #fff;
+}
+
+.cvav-product-list {
+    padding: 0;
+    margin: 0;
+}
+
+.cvav-product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+.cvav-product-item:last-child {
+    border-bottom: none;
+}
+
+.cvav-product-item:hover {
+    background-color: #f9f9f9;
+}
+
+.cvav-product-info {
+    flex: 1;
+    margin-right: 15px;
+}
+
+.cvav-product-info strong {
+    color: #23282d;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.cvav-product-info small {
+    color: #666;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.cvav-select-product {
+    white-space: nowrap;
+    font-size: 12px;
+    padding: 4px 8px;
+    height: auto;
+    line-height: 1.3;
+}
+
+.cvav-no-results {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+/* Acciones de conexión */
+.cvav-connect-actions {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.cvav-connect-actions .button {
+    font-size: 16px;
+    padding: 10px 20px;
+    height: auto;
+}
+
+/* Tabla de productos conectados */
+#connected-products-table {
+    margin-top: 15px;
+}
+
+#connected-products-table th {
+    font-weight: 600;
+    background: #f1f1f1;
+    padding: 12px 8px;
+}
+
+#connected-products-table td {
+    padding: 12px 8px;
+    vertical-align: top;
+}
+
+#connected-products-table strong {
+    color: #23282d;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 3px;
+}
+
+#connected-products-table small {
+    color: #666;
+    font-size: 12px;
+}
+
+/* Estados de carga */
+#connected-products-loading {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+#connected-products-loading p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* Mensaje de no productos conectados */
+#connected-products-empty {
+    text-align: center;
+    padding: 40px 20px;
+    background: #f9f9f9;
+    border: 2px dashed #ddd;
+    border-radius: 4px;
+    color: #666;
+}
+
+#connected-products-empty p {
+    font-size: 16px;
+    margin: 0;
+}
+
+/* Responsive para productos */
+@media (max-width: 768px) {
+    .cvav-search-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .cvav-search-input {
+        flex-direction: column;
+    }
+    
+    .cvav-search-input .button {
+        align-self: flex-start;
+    }
+    
+    .cvav-product-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .cvav-product-info {
+        margin-right: 0;
+    }
+    
+    .cvav-select-product {
+        align-self: flex-end;
+    }
+}
+
+/* Colores alternados para las tablas de productos */
+#matching-products-table tbody tr:nth-child(even),
+#connected-products-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#matching-products-table tbody tr:nth-child(odd),
+#connected-products-table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+#matching-products-table tbody tr:hover,
+#connected-products-table tbody tr:hover {
+    background-color: #f0f7ff;
+}
+
+/* Estilos para variaciones en las tablas */
+.cvav-variation-info {
+    font-style: italic;
+    color: #666;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.cvav-product-type-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-left: 5px;
+}
+
+.cvav-product-type-simple {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.cvav-product-type-variable {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.cvav-product-type-variation {
+    background-color: #fff3cd;
+    color: #856404;
+} 
+
+/* Advertencia importante en configuración */
+.cvav-important-notice {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 8px;
+    padding: 25px;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.cvav-important-notice h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.cvav-important-notice p {
+    margin-bottom: 10px;
+}
+
+.cvav-important-notice .button {
+    margin-top: 10px;
+} 
+
+/* Links de productos */
+.cvav-product-link {
+    color: #0073aa;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.cvav-product-link:hover {
+    color: #005a87;
+    text-decoration: underline;
+}
+
+.cvav-product-link:focus {
+    outline: 2px solid #0073aa;
+    outline-offset: 2px;
+} 
+
+/* Contadores de tablas */
+.cvav-counter {
+    background: #0073aa;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+.cvav-counter.zero {
+    background: #ccc;
+    color: #666;
+} 

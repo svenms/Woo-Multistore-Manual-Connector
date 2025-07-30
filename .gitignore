@@ -1,0 +1,62 @@
+# WordPress Plugin .gitignore
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de log
+*.log
+error_log
+debug.log
+
+# Archivos temporales
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Archivos de configuración local
+wp-config.php
+.env
+
+# Archivos de caché
+cache/
+tmp/
+temp/
+
+# Archivos de compilación
+*.min.js
+*.min.css
+dist/
+build/
+
+# Archivos de dependencias (si usas Composer)
+vendor/
+composer.lock
+
+# Archivos de Node.js (si usas npm/yarn)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Archivos de testing
+tests/coverage/
+.phpunit.result.cache
+
+# Archivos específicos del plugin
+*.zip
+*.tar.gz
+releases/
+
+# Archivos de backup del plugin
+*.backup
+*.old 

@@ -1,0 +1,53 @@
+{
+    "name": "woo-multisite-connector/woo-multisite-manual-connector",
+    "description": "Conecta productos y atributos entre sitios master y slave usando WooCommerce Multistore",
+    "type": "wordpress-plugin",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Woo Multisite Connector",
+            "email": "info@woomultisiteconnector.com",
+            "homepage": "https://woomultisiteconnector.com"
+        }
+    ],
+    "keywords": [
+        "wordpress",
+        "woocommerce",
+        "multisite",
+        "multistore",
+        "plugin"
+    ],
+    "homepage": "https://woomultisiteconnector.com",
+    "require": {
+        "php": ">=7.4",
+        "composer/installers": "~1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "squizlabs/php_codesniffer": "^3.0",
+        "phpcompatibility/php-compatibility": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WooMultisiteConnector\\": "includes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WooMultisiteConnector\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpcs": "phpcs --standard=WordPress",
+        "phpcbf": "phpcbf --standard=WordPress"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    },
+    "extra": {
+        "installer-name": "woo-multisite-manual-connector"
+    }
+} 
